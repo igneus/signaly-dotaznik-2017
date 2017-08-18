@@ -1,0 +1,159 @@
+\documentclass[12pt, a4paper, twoside]{article}
+
+% To compile:
+%
+% $ xelatex filename
+% $ biber filename
+% $ xelatex filename
+
+\usepackage{fontspec}
+\setmainfont[Ligatures={TeX}]{TeXGyrePagella}
+
+\usepackage[czech]{babel}
+\usepackage{csquotes}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, marginparsep=3mm]{geometry}
+
+\usepackage[
+  backend=biber,
+  style=iso-authoryear,
+  sortlocale=cs_CZ,
+  maxnames=3,
+  firstinits=true,
+]{biblatex}
+
+\usepackage[show]{ed} % editorial annotations
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{changepage}
+\usepackage{nameref}
+
+\newcommand{\suser}[1]{\href{https://www.signaly.cz/#1}{\texttt{@#1}}}
+
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\bibliography{biblio}
+
+\author{Jakub Pavlík}
+\title{Vyhodnocení dotazníkového průzkumu \uv{signaly.cz z pohledu uživatelů}}
+
+\begin{document}
+
+\setlength{\parindent}{0.5cm}
+
+\maketitle
+
+\section*{Úvod}
+
+Signály letos slaví deset let provozu jako sociální síť.
+Kromě toho, že se slaví a vzpomíná, však naléhavě vyvstávají otázky
+ohledně dalšího směřování celého projektu:
+není třeba provoz na Signálech pozorovat zvlášť dlouho ani pozorně,
+aby pozorovatel pochopil, že heslo z titulní stránky
+\emph{33 637 mladých křesťanů skrze signály.cz tvoří společenství}
+se s realitou hrubě rozchází:
+web sice snad má přes 33000 registrovaných
+uživatelů, převážná většina uživatelských účtů však je buďto
+úplně opuštěná, nebo vykazuje jen minimální aktivitu.
+Navíc se ukazuje -- jak bude vidět i dále ve výstupech z dotazníku --
+že uživatelskou základnu spíše než mladí křesťané
+tvoří \emph{křesťané, kteří v době spuštění Signálů jako komunitního
+  webu byli mladí:}
+uživatelská základna stárne, Signály nejsou příliš úspěšné
+v oslovování nových uživatelů z řad mládeže.
+Mezi deklarovaným posláním a tím, kým a k čemu jsou Signály skutečně
+využívány, zeje propast, která se nadále rozevírá.
+
+Tyto skutečnosti si žádají nové definování vize a poslání Signálů.
+Přispět k tomu jsem se pokusil s pomocí dotazníku, jehož vyhodnocení
+překládám.
+
+Dotazníkové šetření probíhalo v týdnu 26.~7.--2.~8. 2017
+s pomocí dotazníku postaveného v Google Forms.
+K oslovení respondentů byl využit článek na osobním blogu
+\url{http://dromedar.signaly.cz}, redakcí Signálů pro ten účel
+na celý týden laskavě vystavený v bloku redakčního obsahu
+na titulní stránce, takže se dostal i k těm, kdo blog normálně
+nečtou.
+Za týden, kdy byl dotazník propagován a probíhal sběr odpovědí,
+se jich podařilo nasbírat 215. Je potřeba zohlednit to, že
+šetření probíhalo v době dovolených, po poměrně krátkou dobu
+a bez masivní \uv{marketingové podpory},
+přesto počet sebraných odpovědí jistě má i určitou vypovídací
+hodnotu ohledně velikosti aktivní části uživatelské základny.
+
+\section{Otázky}
+
+Otázky byly rozděleny do šesti bloků.
+První blok (\nameref{sec:mojeaktivita})
+je nepříliš sourodá skupina otázek bez opravdového společného tématu.
+
+Další tři
+(\nameref{sec:kcemu}, \nameref{sec:funkcionality}, \nameref{sec:jinesite})
+se z různých stran snaží dobýt odpověď na otázku, čím Signály jsou
+pro své uživatele, jako co jsou používány.
+Opovídají priority uživatelů prioritám redakce a vývoje?
+A pokud ne, je to mylnými představami o prioritách uživatelů,
+nebo třeba snahou oslovit potenciální uživatele s jinými prioritami?
+
+Předposlední blok otázek (\nameref{sec:ostatniuzivatele})
+reaguje na hlasy, že na Signálech je nevlídné prostředí
+a je třeba ho \uv{zútulnit} propracovanějším systémem nastavení
+soukromí, nebo postihy uživatelů, kteří jsou vnímáni jako problémoví.
+Odpovědi na otázky tohoto bloku by měly ukázat, jak velká část
+uživatelské základny tyto problémy vnímá jako palčivé.
+
+Otázky závěrečného bloku (\nameref{sec:osobni})
+slouží ke strukturování odpovědí
+podle vybraných antropologických proměnných.
+
+\subsection{Moje aktivita na Signálech}\label{sec:mojeaktivita}
+
+\subsubsection{Na Signálech mám profil}
+
+\subsubsection{O Signálech jsem se poprvé dozvěděl/a}
+
+\subsubsection{Na Signály chodím}
+
+\subsection{K čemu Signály používám}\label{sec:kcemu}
+
+\subsection{Funkcionality, které využívám}\label{sec:funkcionality}
+
+\subsection{Signály a jiné sociální sítě}\label{sec:jinesite}
+
+\subsection{Já a ostatní uživatelé}\label{sec:ostatniuzivatele}
+
+\subsection{Osobní údaje}\label{sec:osobni}
+
+\section{Vypovídací hodnota sebraných dat}
+
+(Ne)Ochrana před vícenásobným vyplněním
+
+Nepravdivé informace
+
+Reprezentativnost vzorku vzhledem k počtu aktivních uživatelů
+
+Možná selekce uživatelů (ti, které vůbec nezajímá redakční obsah,
+nemají rádi autora dotazníku apod.)
+
+\section*{Poděkování}
+
+Závěrem je třeba poděkovat všem, kdo se na dotazníku podíleli:
+\suser{psycho-kat}, jejíž otázka po \uv{tvrdých datech}
+vznik dotazníku vyprovokovala;
+\suser{JiKu}, \suser{slu-nicko}, \suser{plihalik}, \suser{mia-maru},
+\suser{Papo} a \suser{alweryon}, kteří pročetli otázky před spuštěním
+dotazníku a poskytli mi k nim zpětnou vazbu;
+šéfredaktorce \suser{Kollenka}, která článek s pozváním k vyplnění
+dotazníku na celý týden umístila do bloku redakčního obsahu,
+takže se dostal
+k mnohem více uživatelům, než by běžný příspěvek z osobního blogu
+kdy mohl;
+zejména ale patří velký dík každému, kdo věnoval kus svého času
+a dotazník vyplnil.
+
+\printbibliography
+
+\end{document}
