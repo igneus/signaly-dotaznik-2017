@@ -1,4 +1,4 @@
-deps = Dir["*.tex"] + Dir["*.*bx"] + Dir['*.bib']
+deps = Dir["*.tex"] + Dir["*.*bx"] + Dir['*.bib'] + [:graphs]
 
 main = Dir['*.tex'].first # only one expected
 main_noext = main.sub '.tex', ''
@@ -19,4 +19,8 @@ task :clean do
       sh "rm *."+s
     end
   end
+end
+
+task :graphs do
+  sh 'Rscript graphs/*.R'
 end
