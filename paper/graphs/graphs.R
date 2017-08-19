@@ -1,5 +1,7 @@
 # jednoduché rozložení odpovědí pro jednotlivé otázky
 
+## funkce
+
 write_answer_count <- function (responses, colname, filename=colname) {
     count <- length(na.omit(responses[[colname]]))
 
@@ -11,9 +13,10 @@ write_answer_count <- function (responses, colname, filename=colname) {
 
 graph_path <- function (colname) paste("graphs/img/", colname, ".pdf", sep="")
 
+## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 
-# koláčový graf rozložení odpovědí
+## koláčový graf rozložení odpovědí
 columns = list(
 "na_signalech_mam_profil", "o_signalech_jsem_se_poprve_dozvedel", "na_signaly_chodim",
 "jsem_autorizovany",
@@ -33,7 +36,7 @@ for (colname in columns) {
     dev.off()
 }
 
-# sloupcový graf, kažá odpověď může obsahovat víc položek
+## sloupcový graf, každá odpověď může obsahovat víc položek
 columns <- list("pouzivas_dalsi_socialni_site", "na_signalech_jsem_zazil")
 
 for (colname in columns) {
@@ -50,7 +53,7 @@ for (colname in columns) {
     dev.off()
 }
 
-# sloupcový graf, kažá odpověď může obsahovat víc položek,
+## sloupcový graf, kažá odpověď může obsahovat víc položek,
 # některé položky obsahují čárky
 columns <- list("na_signaly_chodim_hlavne", "signaly_jsem_vyuzil_k", "na_signalech_se_mi_povedlo")
 
@@ -68,7 +71,7 @@ for (colname in columns) {
     dev.off()
 }
 
-# frekvence využívání funkcionalit
+## frekvence využívání funkcionalit
 functionalities = list("[status][pisu]", "[status][ctu]", "[status][komentuji]", "[sledovane_blogy][ctu]", "[blogy_vyber][ctu]", "[blogy_nesledovane][ctu]", "[blog][komentuji]", "[blog][pisu]", "[fotky][prohlizim]", "[fotky][vkladam]", "[akce][prohlizim]", "[akce][vkladam]", "[zed_spolecenstvi][ctu]", "[zed_spolecenstvi][pisu]", "[videa][prohlizim]", "[videa][vkladam]", "[autorizovani][chat]")
 funcOptions <- c("vůbec", "méně než jednou týdně", "alespoň jednou týdně", "denně", "vícekrát za den")
 
@@ -91,7 +94,7 @@ for (f in functionalities) {
     dev.off()
 }
 
-# frekvence využívání jiných sociálních sítí
+## frekvence využívání jiných sociálních sítí
 networks = list("[Facebook]", "[Twitter]", "[Youtube]", "[Instagram]", "[Googleplus]", "[Lidecz]")
 netOptions = c("vůbec", "několikrát za měsíc nebo méně", "jednou nebo několikrát týdně", "každý den", "vícekrát za den")
 
@@ -114,5 +117,32 @@ for (n in networks) {
     dev.off()
 }
 
-# vypsat varování
+## proč i v nynější konkurenci používám Signály
+reasons = list("[jenom_signaly]", "[signaly_nejdulezitejsi]", "[kamaradi_kteri_jinde_nejsou]", "[zajimavi_lide_kteri_jinde_nejsou]", "[jedinecna_aktivita]", "[jedinecne_informace]", "[oblibene_blogy]", "[krestanske_prostredi]")
+reasOptions <- c("zcela souhlasím", "spíše souhlasím", "ani souhlas, ani nesouhlas", "spíše nesouhlasím", "vůbec nesouhlasím")
+
+for (r in reasons) {
+    csvcolname = paste("proc_signaly", r, sep="")
+    print(csvcolname)
+
+    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+
+    write_answer_count(responses, colname, filename)
+    col <- responses[[colname]]
+
+    frequency <- table(col)
+    frequency <- frequency[reasOptions] # seřadit podle daného pořadí
+
+    pdf(graph_path(filename))
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,14,4,2)) # okraje
+    barplot(frequency, horiz=TRUE)
+    dev.off()
+}
+
+## volná otázka - necháme si uložit pouze počet odpovědí
+write_answer_count(responses, "proc_signaly_jine")
+
+## vypsat varování
 warnings()
