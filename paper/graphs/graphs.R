@@ -17,7 +17,6 @@ responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 columns = list(
 "na_signalech_mam_profil", "o_signalech_jsem_se_poprve_dozvedel", "na_signaly_chodim",
 "jsem_autorizovany",
-"na_signalech_jsem_zazil",
 "jsem", "vek", "studuji", "moje_nejvyssi_dosazene_vzdelani"
 )
 
@@ -35,7 +34,7 @@ for (colname in columns) {
 }
 
 # sloupcový graf, kažá odpověď může obsahovat víc položek
-columns <- list("pouzivas_dalsi_socialni_site")
+columns <- list("pouzivas_dalsi_socialni_site", "na_signalech_jsem_zazil")
 
 for (colname in columns) {
     write_answer_count(responses, colname)
