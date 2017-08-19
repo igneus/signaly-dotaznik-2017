@@ -1,5 +1,14 @@
 # jednoduché rozložení odpovědí pro jednotlivé otázky
 
+write_answer_count <- function (responses, colname) {
+    count <- length(na.omit(responses[[colname]]))
+
+    path <- paste("graphs/counts/", colname, ".txt", sep="")
+    sink(path)
+    cat(count)
+    sink()
+}
+
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 
 columns = list(
@@ -13,9 +22,7 @@ for (colname in columns) {
     col <- responses[[colname]]
 
     # kolik uživatelů na otázku odpovědělo?
-    responseCount = length(na.omit(col))
-    print(colname)
-    print(responseCount)
+    write_answer_count(responses, colname)
 
     # graf
     path <- paste("graphs/img/", colname, ".pdf", sep="")
@@ -27,6 +34,7 @@ for (colname in columns) {
 
 # další sociální sítě: každý řádek může obsahovat několik hodnot
 colname <- "pouzivas_dalsi_socialni_site"
+write_answer_count(responses, colname)
 col <- responses[[colname]]
 
 networks <- unlist(lapply(col, function (x) strsplit(as.character(x), ", ")))
@@ -38,3 +46,6 @@ par(las=2) # popisky horizontálně
 par(mar=c(5,8,4,2)) # okraje
 barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
 dev.off()
+
+# vypsat varování
+warnings()
