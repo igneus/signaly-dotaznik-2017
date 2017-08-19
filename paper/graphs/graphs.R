@@ -35,7 +35,7 @@ for (colname in columns) {
 }
 
 # sloupcový graf, kažá odpověď může obsahovat víc položek
-columns <- list("pouzivas_dalsi_socialni_site", "na_signalech_se_mi_povedlo")
+columns <- list("pouzivas_dalsi_socialni_site")
 
 for (colname in columns) {
     write_answer_count(responses, colname)
@@ -53,7 +53,7 @@ for (colname in columns) {
 
 # sloupcový graf, kažá odpověď může obsahovat víc položek,
 # některé položky obsahují čárky
-columns <- list("na_signaly_chodim_hlavne", "signaly_jsem_vyuzil_k")
+columns <- list("na_signaly_chodim_hlavne", "signaly_jsem_vyuzil_k", "na_signalech_se_mi_povedlo")
 
 for (colname in columns) {
     write_answer_count(responses, colname)
