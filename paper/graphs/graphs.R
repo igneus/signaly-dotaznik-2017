@@ -1,9 +1,9 @@
 # jednoduché rozložení odpovědí pro jednotlivé otázky
 
-write_answer_count <- function (responses, colname) {
+write_answer_count <- function (responses, colname, filename=colname) {
     count <- length(na.omit(responses[[colname]]))
 
-    path <- paste("graphs/counts/", colname, ".txt", sep="")
+    path <- paste("graphs/counts/", filename, ".txt", sep="")
     sink(path)
     cat(count)
     sink()
@@ -65,6 +65,52 @@ for (colname in columns) {
     par(las=2) # popisky horizontálně
     par(mar=c(5,20,4,2)) # okraje
     barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+    dev.off()
+}
+
+# frekvence využívání funkcionalit
+functionalities = list("[status][pisu]", "[status][ctu]", "[status][komentuji]", "[sledovane_blogy][ctu]", "[blogy_vyber][ctu]", "[blogy_nesledovane][ctu]", "[blog][komentuji]", "[blog][pisu]", "[fotky][prohlizim]", "[fotky][vkladam]", "[akce][prohlizim]", "[akce][vkladam]", "[zed_spolecenstvi][ctu]", "[zed_spolecenstvi][pisu]", "[videa][prohlizim]", "[videa][vkladam]", "[autorizovani][chat]")
+funcOptions <- c("vůbec", "méně než jednou týdně", "alespoň jednou týdně", "denně", "vícekrát za den")
+
+for (f in functionalities) {
+    csvcolname = paste("funkcionality", f, sep="")
+
+    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+
+    write_answer_count(responses, colname, filename)
+    col <- responses[[colname]]
+
+    frequency <- table(col)
+    frequency <- frequency[funcOptions] # seřadit podle daného pořadí
+
+    pdf(graph_path(filename))
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,10,4,2)) # okraje
+    barplot(frequency, horiz=TRUE)
+    dev.off()
+}
+
+# frekvence využívání jiných sociálních sítí
+networks = list("[Facebook]", "[Twitter]", "[Youtube]", "[Instagram]", "[Googleplus]", "[Lidecz]")
+netOptions = c("vůbec", "několikrát za měsíc nebo méně", "jednou nebo několikrát týdně", "každý den", "vícekrát za den")
+
+for (n in networks) {
+    csvcolname = paste("jine_site", n, sep="")
+
+    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+
+    write_answer_count(responses, colname, filename)
+    col <- responses[[colname]]
+
+    frequency <- table(col)
+    frequency <- frequency[netOptions] # seřadit podle daného pořadí
+
+    pdf(graph_path(filename))
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,14,4,2)) # okraje
+    barplot(frequency, horiz=TRUE)
     dev.off()
 }
 
