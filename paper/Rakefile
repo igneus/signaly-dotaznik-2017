@@ -10,6 +10,7 @@ file main_pdf => deps do |t|
   sh "xelatex #{main_noext}"
 end
 
+desc "sestavit dokument"
 task :default => [main_pdf]
 
 desc "smazat vedlejsi produkty sazby latexem"
@@ -21,6 +22,7 @@ task :clean do
   end
 end
 
+desc "vygenerovat grafy"
 task :graphs do
   sh 'Rscript graphs/*.R'
 end
