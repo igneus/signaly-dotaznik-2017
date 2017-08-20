@@ -85,11 +85,18 @@ for (colname in columns) {
 functionalities = list("[status][pisu]", "[status][ctu]", "[status][komentuji]", "[sledovane_blogy][ctu]", "[blogy_vyber][ctu]", "[blogy_nesledovane][ctu]", "[blog][komentuji]", "[blog][pisu]", "[fotky][prohlizim]", "[fotky][vkladam]", "[akce][prohlizim]", "[akce][vkladam]", "[zed_spolecenstvi][ctu]", "[zed_spolecenstvi][pisu]", "[videa][prohlizim]", "[videa][vkladam]", "[autorizovani][chat]")
 funcOptions <- c("vůbec", "méně než jednou týdně", "alespoň jednou týdně", "denně", "vícekrát za den")
 
+authorized_users <- responses[responses$jsem_autorizovany == "ano", ]
+
 for (f in functionalities) {
     csvcolname <- paste("funkcionality", f, sep="")
 
-    write_answer_count(responses, csvcolname)
-    col <- responses[[rcolname(csvcolname)]]
+    f_responses <- responses
+    if (f == "[autorizovani][chat]") {
+       f_responses <- authorized_users
+    }
+
+    write_answer_count(f_responses, csvcolname)
+    col <- f_responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
     frequency <- frequency[funcOptions] # seřadit podle daného pořadí
