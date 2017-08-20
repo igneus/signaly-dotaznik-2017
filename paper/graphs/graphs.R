@@ -76,10 +76,10 @@ functionalities = list("[status][pisu]", "[status][ctu]", "[status][komentuji]",
 funcOptions <- c("vůbec", "méně než jednou týdně", "alespoň jednou týdně", "denně", "vícekrát za den")
 
 for (f in functionalities) {
-    csvcolname = paste("funkcionality", f, sep="")
+    csvcolname <- paste("funkcionality", f, sep="")
 
-    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
 
     write_answer_count(responses, colname, filename)
     col <- responses[[colname]]
@@ -99,10 +99,10 @@ networks = list("[Facebook]", "[Twitter]", "[Youtube]", "[Instagram]", "[Googlep
 netOptions = c("vůbec", "několikrát za měsíc nebo méně", "jednou nebo několikrát týdně", "každý den", "vícekrát za den")
 
 for (n in networks) {
-    csvcolname = paste("jine_site", n, sep="")
+    csvcolname <- paste("jine_site", n, sep="")
 
-    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
 
     write_answer_count(responses, colname, filename)
     col <- responses[[colname]]
@@ -123,10 +123,9 @@ reasOptions <- c("zcela souhlasím", "spíše souhlasím", "ani souhlas, ani nes
 
 for (r in reasons) {
     csvcolname = paste("proc_signaly", r, sep="")
-    print(csvcolname)
 
-    colname = gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename = gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
 
     write_answer_count(responses, colname, filename)
     col <- responses[[colname]]
