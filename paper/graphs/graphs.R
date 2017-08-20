@@ -167,26 +167,32 @@ for (i in interactions) {
 
 ## Nepříjemné ...
 
-# jen respondenti, kteří daný druh "nepříjemností" zažili
-with_up_comments <- responses[grep("Nepříjemné komentáře", responses[[rcolname("neprijemne[co]")]]), ]
-with_up_messages <- responses[grep("Nepříjemné vzkazy", responses[[rcolname("neprijemne[co]")]]), ]
+up_cfgs = list(
+    list(selector="Nepříjemné komentáře", colnamepart="[komentare]"),
+    list(selector="Nepříjemné vzkazy", colnamepart="[vzkazy]")
+)
 
-## ... mi byly nepříjemné, protože ...
+for (cfg in up_cfgs) {
+    # jen respondenti, kteří daný druh "nepříjemnosti" zažili
+    relevant_responses <- responses[grep(cfg$selector, responses[[rcolname("neprijemne[co]")]]), ]
 
-csvcolname = "neprijemne[komentare][protoze]"
-write_answer_count(with_up_comments, csvcolname)
-col <- with_up_comments[[rcolname(csvcolname)]]
+    ## ... mi byly nepříjemné, protože ...
 
-reasons <- unlist(lapply(col, function (x) strsplit(as.character(x), ",  "))) # čárka a dvě mezery, protože odpovědi často obsahují čárky
+    csvcolname = paste("neprijemne", cfg$colnamepart, "[protoze]", sep="")
+    write_answer_count(relevant_responses, csvcolname)
+    col <- relevant_responses[[rcolname(csvcolname)]]
 
-print(csvcolname)
-print(graph_path(csvcolname))
-pdf(graph_path(csvcolname))
-frequency = sort(table(reasons))
-par(las=2) # popisky horizontálně
-par(mar=c(5,20,4,2)) # okraje
-barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
-dev.off()
+    reasons <- unlist(lapply(col, function (x) strsplit(as.character(x), ",  "))) # čárka a dvě mezery, protože odpovědi často obsahují čárky
+
+    print(csvcolname)
+    print(graph_path(csvcolname))
+    pdf(graph_path(csvcolname))
+    frequency = sort(table(reasons))
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,20,4,2)) # okraje
+    barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+    dev.off()
+}
 
 ## vypsat varování
 warnings()
