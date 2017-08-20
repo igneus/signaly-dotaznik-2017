@@ -37,7 +37,7 @@ for (colname in columns) {
 }
 
 ## sloupcový graf, každá odpověď může obsahovat víc položek
-columns <- list("pouzivas_dalsi_socialni_site", "na_signalech_jsem_zazil")
+columns <- list("pouzivas_dalsi_socialni_site")
 
 for (colname in columns) {
     write_answer_count(responses, colname)
@@ -142,6 +142,30 @@ for (r in reasons) {
 
 ## volná otázka - necháme si uložit pouze počet odpovědí
 write_answer_count(responses, "proc_signaly_jine")
+
+## já a ostatní uživatelé
+interactions <- list("[tesi_me][libi_se][kamaradi]", "[tesi_me][libi_se][cizi]", "[tesi_me][komentar][kamaradi]", "[tesi_me][komentar][cizi]", "[tesi_me][zprava][kamaradi]", "[tesi_me][zprava][cizi]", "[autorizovani_duveryhodnejsi]", "[neprijemne][komunikace_obtezuje]", "[neprijemne][neprijemne_situace]", "[neprijemne][zazivat_nechci]")
+intOptions <- c("zcela souhlasím", "spíše souhlasím", "je mi to jedno", "spíše nesouhlasím", "vůbec nesouhlasím")
+
+for (i in interactions) {
+    csvcolname <- paste("ostatni", i, sep="")
+    print(csvcolname)
+
+    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
+
+    write_answer_count(responses, colname, filename)
+    col <- responses[[colname]]
+
+    frequency <- table(col)
+    frequency <- frequency[intOptions] # seřadit podle daného pořadí
+
+    pdf(graph_path(filename))
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,14,4,2)) # okraje
+    barplot(frequency, horiz=TRUE)
+    dev.off()
+}
 
 ## vypsat varování
 warnings()
