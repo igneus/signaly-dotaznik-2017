@@ -12,7 +12,7 @@ write_answer_count <- function (responses, csvcolname) {
 }
 
 graph_path <- function (csvcolname)
-    paste("graphs/img/", basefilename(colname), ".pdf", sep="")
+    paste("graphs/img/", basefilename(csvcolname), ".pdf", sep="")
 
 # jak se sloupec z csv souboru jmenuje po načtení:
 # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
@@ -144,9 +144,10 @@ for (r in reasons) {
 ## volná otázka - necháme si uložit pouze počet odpovědí
 write_answer_count(responses, "proc_signaly_jine")
 
+souhlas_jedno_nesouhlas <- c("zcela souhlasím", "spíše souhlasím", "je mi to jedno", "spíše nesouhlasím", "vůbec nesouhlasím")
+
 ## já a ostatní uživatelé
 interactions <- list("[tesi_me][libi_se][kamaradi]", "[tesi_me][libi_se][cizi]", "[tesi_me][komentar][kamaradi]", "[tesi_me][komentar][cizi]", "[tesi_me][zprava][kamaradi]", "[tesi_me][zprava][cizi]", "[autorizovani_duveryhodnejsi]", "[neprijemne][komunikace_obtezuje]", "[neprijemne][neprijemne_situace]", "[neprijemne][zazivat_nechci]")
-intOptions <- c("zcela souhlasím", "spíše souhlasím", "je mi to jedno", "spíše nesouhlasím", "vůbec nesouhlasím")
 
 for (i in interactions) {
     csvcolname <- paste("ostatni", i, sep="")
@@ -155,7 +156,7 @@ for (i in interactions) {
     col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
-    frequency <- frequency[intOptions] # seřadit podle daného pořadí
+    frequency <- frequency[souhlas_jedno_nesouhlas] # seřadit podle daného pořadí
 
     pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
@@ -163,6 +164,29 @@ for (i in interactions) {
     barplot(frequency, horiz=TRUE)
     dev.off()
 }
+
+## Nepříjemné ...
+
+# jen respondenti, kteří daný druh "nepříjemností" zažili
+with_up_comments <- responses[grep("Nepříjemné komentáře", responses[[rcolname("neprijemne[co]")]]), ]
+with_up_messages <- responses[grep("Nepříjemné vzkazy", responses[[rcolname("neprijemne[co]")]]), ]
+
+## ... mi byly nepříjemné, protože ...
+
+csvcolname = "neprijemne[komentare][protoze]"
+write_answer_count(with_up_comments, csvcolname)
+col <- with_up_comments[[rcolname(csvcolname)]]
+
+reasons <- unlist(lapply(col, function (x) strsplit(as.character(x), ",  "))) # čárka a dvě mezery, protože odpovědi často obsahují čárky
+
+print(csvcolname)
+print(graph_path(csvcolname))
+pdf(graph_path(csvcolname))
+frequency = sort(table(reasons))
+par(las=2) # popisky horizontálně
+par(mar=c(5,20,4,2)) # okraje
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
 
 ## vypsat varování
 warnings()
