@@ -23,6 +23,11 @@ rcolname <- function (csvcolname)
 basefilename <- function (csvcolname)
     gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE)
 
+# returns a palette-generating _function_ for "semaphore-like"
+# red-to-green colour transition
+# credits: https://stackoverflow.com/a/13353264/2034213
+red_to_green <- colorRampPalette(c("red", "yellow", "darkgreen"))
+
 ## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 
@@ -152,12 +157,12 @@ for (r in reasons) {
     col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
-    frequency <- frequency[reasOptions] # seřadit podle daného pořadí
+    frequency <- frequency[rev(reasOptions)] # seřadit podle daného pořadí
 
     pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, horiz=TRUE)
+    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
     dev.off()
 }
 
@@ -176,12 +181,12 @@ for (i in interactions) {
     col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
-    frequency <- frequency[souhlas_jedno_nesouhlas] # seřadit podle daného pořadí
+    frequency <- frequency[rev(souhlas_jedno_nesouhlas)] # seřadit podle daného pořadí
 
     pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, horiz=TRUE)
+    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
     dev.off()
 }
 
@@ -222,12 +227,12 @@ for (cfg in up_cfgs) {
         col <- relevant_responses[[rcolname(csvcolname)]]
 
         frequency <- table(col)
-        frequency <- frequency[souhlas_jedno_nesouhlas] # seřadit podle daného pořadí
+        frequency <- frequency[rev(souhlas_jedno_nesouhlas)] # seřadit podle daného pořadí
 
         pdf(graph_path(csvcolname))
         par(las=2) # popisky horizontálně
         par(mar=c(5,14,4,2)) # okraje
-        barplot(frequency, horiz=TRUE)
+        barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
         dev.off()
     }
 }
