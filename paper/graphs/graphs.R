@@ -54,8 +54,7 @@ colname <- "studuji_co"
 col <- students[[colname]]
 write_answer_count(students, colname)
 pdf(graph_path(colname))
-frequency = sort(table(col))
-print(frequency)
+frequency = sort(table(as.character(col)))
 pie(frequency, col=rainbow(length(frequency)))
 barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE)
 dev.off()
