@@ -22,20 +22,26 @@
 \usepackage{changepage}
 \usepackage{nameref}
 \usepackage{graphicx}
+\usepackage{float} % necessary for figures with placement [H]
 
 \newcommand{\suser}[1]{\href{https://www.signaly.cz/#1}{\texttt{@#1}}}
 
 \newcommand{\answercount}[1]{Odpovědělo \input{graphs/counts/#1.txt} respondentů}
 
-\newcommand{\includegraph}[1]{
-  \includegraphics{graphs/img/#1.pdf}
-
-  \answercount{#1}
+\newcommand{\includegraph}[2]{
+  \begin{figure}[H]
+    \centering
+    \textbf{#2}
+    \includegraphics{graphs/img/#1.pdf}
+    \answercount{#1}
+  \end{figure}
 }
 
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+
+\extrafloats{200} % greater limit of floats awaiting placement
 
 \bibliography{biblio}
 
@@ -120,105 +126,105 @@ podle vybraných antropologických proměnných.
 
 \subsubsection{Na Signálech mám profil}
 
-\includegraph{na_signalech_mam_profil}
+\includegraph{na_signalech_mam_profil}{}
 
 \subsubsection{O Signálech jsem se poprvé dozvěděl/a}
 
-\includegraph{o_signalech_jsem_se_poprve_dozvedel}
+\includegraph{o_signalech_jsem_se_poprve_dozvedel}{}
 
 \subsubsection{Na Signály chodím}
 
-\includegraph{na_signaly_chodim}
+\includegraph{na_signaly_chodim}{}
 
 \subsection{K čemu Signály používám}\label{sec:kcemu}
 
 \subsubsection{Na Signály chodím hlavně}
 
-\includegraph{na_signaly_chodim_hlavne}
+\includegraph{na_signaly_chodim_hlavne}{}
 
 \subsubsection{Signály jsem využil/a k}
 
-\includegraph{signaly_jsem_vyuzil_k}
+\includegraph{signaly_jsem_vyuzil_k}{}
 
 \subsubsection{Na Signálech \uv{se mi povedlo}}
 
-\includegraph{na_signalech_se_mi_povedlo}
+\includegraph{na_signalech_se_mi_povedlo}{}
 
 \subsection{Funkcionality, které využívám}\label{sec:funkcionality}
 
 \subsubsection{Jsem autorizovaný/á}
 
-\includegraph{jsem_autorizovany}
+\includegraph{jsem_autorizovany}{}
 
 \subsubsection{Jak často využívám jednotlivé funkcionality}
 
 \textbf{Na svou zeď píšu}
 
-\includegraph{funkcionality_status_pisu}
+\includegraph{funkcionality_status_pisu}{}
 
 \textbf{Statusy přátel čtu}
 
-\includegraph{funkcionality_status_ctu}
+\includegraph{funkcionality_status_ctu}{}
 
 \textbf{Statusy přátel komentuji}
 
-\includegraph{funkcionality_status_komentuji}
+\includegraph{funkcionality_status_komentuji}{}
 
 \textbf{Svoje sledované blogy čtu}
 
-\includegraph{funkcionality_sledovane_blogy_ctu}
+\includegraph{funkcionality_sledovane_blogy_ctu}{}
 
 \textbf{Výběr z blogů čtu}
 
-\includegraph{funkcionality_blogy_vyber_ctu}
+\includegraph{funkcionality_blogy_vyber_ctu}{}
 
 \textbf{Blogy, které nesleduji, ani nejsou ve výběru, čtu}
 
-\includegraph{funkcionality_blogy_nesledovane_ctu}
+\includegraph{funkcionality_blogy_nesledovane_ctu}{}
 
 \textbf{Komentář pod nějaký blog píšu}
 
-\includegraph{funkcionality_blog_komentuji}
+\includegraph{funkcionality_blog_komentuji}{}
 
 \textbf{Příspěvek na blog píšu}
 
-\includegraph{funkcionality_blog_pisu}
+\includegraph{funkcionality_blog_pisu}{}
 
 \textbf{Fotky si prohlížím}
 
-\includegraph{funkcionality_fotky_prohlizim}
+\includegraph{funkcionality_fotky_prohlizim}{}
 
 \textbf{Fotky vkládám}
 
-\includegraph{funkcionality_fotky_vkladam}
+\includegraph{funkcionality_fotky_vkladam}{}
 
 \textbf{Nabídku akcí si prohlížím nebo hledám akci, kam pojedu}
 
-\includegraph{funkcionality_akce_prohlizim}
+\includegraph{funkcionality_akce_prohlizim}{}
 
 \textbf{Vkládám akci}
 
-\includegraph{funkcionality_akce_vkladam}
+\includegraph{funkcionality_akce_vkladam}{}
 
 \textbf{Zeď společenství čtu}
 
-\includegraph{funkcionality_zed_spolecenstvi_ctu}
+\includegraph{funkcionality_zed_spolecenstvi_ctu}{}
 
 \textbf{Na zeď společenství píšu}
 
-\includegraph{funkcionality_zed_spolecenstvi_pisu}
+\includegraph{funkcionality_zed_spolecenstvi_pisu}{}
 
 \textbf{Na videa se dívám}
 
-\includegraph{funkcionality_videa_prohlizim}
+\includegraph{funkcionality_videa_prohlizim}{}
 
 \textbf{Videa vkládám}
 
-\includegraph{funkcionality_videa_vkladam}
+\includegraph{funkcionality_videa_vkladam}{}
 
 \textbf{(Vyplňují jen autorizovaní uživatelé) Chat používám}
 
-\includegraph{funkcionality_autorizovani_chat}
+\includegraph{funkcionality_autorizovani_chat}{}
 
 \subsection{Signály a jiné sociální sítě}\label{sec:jinesite}
 
@@ -226,65 +232,65 @@ podle vybraných antropologických proměnných.
 
 \textbf{Facebook}
 
-\includegraph{jine_site_Facebook}
+\includegraph{jine_site_Facebook}{}
 
 \textbf{Twitter}
 
-\includegraph{jine_site_Twitter}
+\includegraph{jine_site_Twitter}{}
 
 \textbf{Youtube}
 
-\includegraph{jine_site_Youtube}
+\includegraph{jine_site_Youtube}{}
 
 \textbf{Instagram}
 
-\includegraph{jine_site_Instagram}
+\includegraph{jine_site_Instagram}{}
 
 \textbf{Google+}
 
-\includegraph{jine_site_Googleplus}
+\includegraph{jine_site_Googleplus}{}
 
 \textbf{Lidé.cz}
 
-\includegraph{jine_site_Lidecz}
+\includegraph{jine_site_Lidecz}{}
 
 \subsubsection{Používáš další sociální sítě?}
 
-\includegraph{pouzivas_dalsi_socialni_site}
+\includegraph{pouzivas_dalsi_socialni_site}{}
 
 \subsubsection{Proč používáš Signály, i když je dnes bohatá nabídka jiných sociálních sítí?}
 
 \textbf{Používám jenom Signály, jiné sociální sítě nepotřebuji}
 
-\includegraph{proc_signaly_jenom_signaly}
+\includegraph{proc_signaly_jenom_signaly}{}
 
 \textbf{Signály jsou pro mě nejdůležitější sociální síť}
 
-\includegraph{proc_signaly_signaly_nejdulezitejsi}
+\includegraph{proc_signaly_signaly_nejdulezitejsi}{}
 
 \textbf{Na Signálech jsem kvůli kamarádům, kteří na jiných sociálních sítích nejsou}
 
-\includegraph{proc_signaly_kamaradi_kteri_jinde_nejsou}
+\includegraph{proc_signaly_kamaradi_kteri_jinde_nejsou}{}
 
 \textbf{Na Signálech jsem kvůli zajímavým lidem, kteří nejsou na jiných sociálních sítích}
 
-\includegraph{proc_signaly_zajimavi_lide_kteri_jinde_nejsou}
+\includegraph{proc_signaly_zajimavi_lide_kteri_jinde_nejsou}{}
 
 \textbf{Na Signálech jsem kvůli něčemu, co se děje jenom tam (např. Aktivita nějakého společenství)}
 
-\includegraph{proc_signaly_jedinecna_aktivita}
+\includegraph{proc_signaly_jedinecna_aktivita}{}
 
 \textbf{Na Signálech jsem kvůli informacím, které jinde nejsou}
 
-\includegraph{proc_signaly_jedinecne_informace}
+\includegraph{proc_signaly_jedinecne_informace}{}
 
 \textbf{Na Signálech jsem kvůli blogům, které rád čtu}
 
-\includegraph{proc_signaly_oblibene_blogy}
+\includegraph{proc_signaly_oblibene_blogy}{}
 
 \textbf{Na Signálech jsem proto, že mám rád křesťanské prostředí}
 
-\includegraph{proc_signaly_krestanske_prostredi}
+\includegraph{proc_signaly_krestanske_prostredi}{}
 
 \subsubsection{Pokud jseš na Signálech (ještě) kvůli něčemu jinému, můžeš nám to prozradit tady: (volná otázka)}
 
@@ -367,107 +373,75 @@ Odpovědi byly částečně uspořádány podle témat.
 
 \subsection{Já a ostatní uživatelé}\label{sec:ostatniuzivatele}
 
-\textbf{Těší mě, když se mým kamarádům líbí můj obsah (status, fotka, blog, video)}
+\includegraph{ostatni_tesi_me_libi_se_kamaradi}{Těší mě, když se mým kamarádům líbí můj obsah (status, fotka, blog, video)}
 
-\includegraph{ostatni_tesi_me_libi_se_kamaradi}
+\includegraph{ostatni_tesi_me_libi_se_cizi}{Těší mě, když se cizím lidem líbí můj obsah}
 
-\textbf{Těší mě, když se cizím lidem líbí můj obsah}
+\includegraph{ostatni_tesi_me_komentar_kamaradi}{Těší mě, když moji kamarádi komentují můj obsah}
 
-\includegraph{ostatni_tesi_me_libi_se_cizi}
+\includegraph{ostatni_tesi_me_komentar_cizi}{Těší mě, když cizí lidé komentují můj obsah}
 
-\textbf{Těší mě, když moji kamarádi komentují můj obsah}
+\includegraph{ostatni_tesi_me_zprava_kamaradi}{Těší mě, když mi kamarádi píšou soukromé zprávy}
 
-\includegraph{ostatni_tesi_me_komentar_kamaradi}
+\includegraph{ostatni_tesi_me_zprava_cizi}{Těší mě, když mi cizí lidé píšou soukromé zprávy}
 
-\textbf{Těší mě, když cizí lidé komentují můj obsah}
+\includegraph{ostatni_autorizovani_duveryhodnejsi}{Autorizovaní uživatelé jsou pro mě důvěryhodnější než neautorizovaní}
 
-\includegraph{ostatni_tesi_me_komentar_cizi}
+\includegraph{ostatni_neprijemne_komunikace_obtezuje}{Komunikace na Signálech mě někdy obtěžuje, nebo je mi z ní těžko}
 
-\textbf{Těší mě, když mi kamarádi píšou soukromé zprávy}
+\includegraph{ostatni_neprijemne_neprijemne_situace}{Na Signálech jsem zažil/a situace, které jsou mi nepříjemné}
 
-\includegraph{ostatni_tesi_me_zprava_kamaradi}
-
-\textbf{Těší mě, když mi cizí lidé píšou soukromé zprávy}
-
-\includegraph{ostatni_tesi_me_zprava_cizi}
-
-\textbf{Autorizovaní uživatelé jsou pro mě důvěryhodnější než neautorizovaní}
-
-\includegraph{ostatni_autorizovani_duveryhodnejsi}
-
-\textbf{Komunikace na Signálech mě někdy obtěžuje, nebo je mi z ní těžko}
-
-\includegraph{ostatni_neprijemne_komunikace_obtezuje}
-
-\textbf{Na Signálech jsem zažil/a situace, které jsou mi nepříjemné}
-
-\includegraph{ostatni_neprijemne_neprijemne_situace}
-
-\textbf{Na Signálech jsem zažil/a situace, které zažívat nechci}
-
-\includegraph{ostatni_neprijemne_zazivat_nechci}
+\includegraph{ostatni_neprijemne_zazivat_nechci}{Na Signálech jsem zažil/a situace, které zažívat nechci}
 
 \subsubsection{Na Signálech jsem zažil/a}
 
-\includegraph{neprijemne_co}
+\includegraph{neprijemne_co}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné komentáře) Komentáře mi byly nepříjemné, protože}
 
-\includegraph{neprijemne_komentare_protoze}
+\includegraph{neprijemne_komentare_protoze}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné komentáře)}
 
-\textbf{Uvažoval/a jsem, že kvůli nepříjemným komentářům ze Signálů odejdu}
+\includegraph{neprijemne_komentare_zvazoval_odchod}{Uvažoval/a jsem, že kvůli nepříjemným komentářům ze Signálů odejdu}
 
-\includegraph{neprijemne_komentare_zvazoval_odchod}
+\includegraph{neprijemne_komentare_zakazat}{Na Signálech by mělo být zakázané psát takové komentáře}
 
-\textbf{Na Signálech by mělo být zakázané psát takové komentáře}
-
-\includegraph{neprijemne_komentare_zakazat}
-
-\textbf{Ti, kdo píší takové komentáře, by na Signálech vůbec neměli být}
-
-\includegraph{neprijemne_komentare_pisatele_pryc}
+\includegraph{neprijemne_komentare_pisatele_pryc}{Ti, kdo píší takové komentáře, by na Signálech vůbec neměli být}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné vzkazy) Vzkazy mi byly nepříjemné, protože}
 
-\includegraph{neprijemne_vzkazy_protoze}
+\includegraph{neprijemne_vzkazy_protoze}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné vzkazy)}
 
-\textbf{Uvažoval/a jsem, že kvůli nepříjemným vzkazům ze Signálů odejdu}
+\includegraph{neprijemne_vzkazy_zvazoval_odchod}{Uvažoval/a jsem, že kvůli nepříjemným vzkazům ze Signálů odejdu}
 
-\includegraph{neprijemne_vzkazy_zvazoval_odchod}
+\includegraph{neprijemne_vzkazy_zakazat}{Na Signálech by mělo být zakázané psát takové vzkazy}
 
-\textbf{Na Signálech by mělo být zakázané psát takové vzkazy}
-
-\includegraph{neprijemne_vzkazy_zakazat}
-
-\textbf{Ti, kdo píší takové vzkazy, by na Signálech vůbec neměli být}
-
-\includegraph{neprijemne_vzkazy_pisatele_pryc}
+\includegraph{neprijemne_vzkazy_pisatele_pryc}{Ti, kdo píší takové vzkazy, by na Signálech vůbec neměli být}
 
 \subsection{Osobní údaje}\label{sec:osobni}
 
 \subsubsection{Jsem}
 
-\includegraph{jsem}
+\includegraph{jsem}{}
 
 \subsubsection{Věk}
 
-\includegraph{vek}
+\includegraph{vek}{}
 
 \subsubsection{Studuji}
 
-\includegraph{studuji}
+\includegraph{studuji}{}
 
 \subsubsection{(Jen žáci a studenti) Jsem žák / student}
 
-\includegraph{studuji_co}
+\includegraph{studuji_co}{}
 
 \subsubsection{Moje nejvyšší dosažené vzdělání}
 
-\includegraph{moje_nejvyssi_dosazene_vzdelani}
+\includegraph{moje_nejvyssi_dosazene_vzdelani}{}
 
 \section{Volná otázka \uv{Chci dodat}}
 
