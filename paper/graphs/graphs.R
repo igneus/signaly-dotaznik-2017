@@ -2,16 +2,26 @@
 
 ## funkce
 
-write_answer_count <- function (responses, colname, filename=colname) {
-    count <- length(na.omit(responses[[colname]]))
+write_answer_count <- function (responses, csvcolname) {
+    count <- length(na.omit(responses[[rcolname(colname)]]))
 
-    path <- paste("graphs/counts/", filename, ".txt", sep="")
+    path <- paste("graphs/counts/", basefilename(csvcolname), ".txt", sep="")
     sink(path)
     cat(count)
     sink()
 }
 
-graph_path <- function (colname) paste("graphs/img/", colname, ".pdf", sep="")
+graph_path <- function (csvcolname)
+    paste("graphs/img/", basefilename(colname), ".pdf", sep="")
+
+# jak se sloupec z csv souboru jmenuje po načtení:
+# R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
+rcolname <- function (csvcolname)
+    gsub("[\\[\\]]", ".", csvcolname, perl=TRUE)
+
+# podoba názvu sloupce vhodná pro název souboru (s grafem atd.)
+basefilename <- function (csvcolname)
+    gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE)
 
 ## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
@@ -37,11 +47,11 @@ for (colname in columns) {
 }
 
 ## sloupcový graf, každá odpověď může obsahovat víc položek
-columns <- list("pouzivas_dalsi_socialni_site")
+columns <- list("pouzivas_dalsi_socialni_site", "neprijemne[co]")
 
 for (colname in columns) {
     write_answer_count(responses, colname)
-    col <- responses[[colname]]
+    col <- responses[[rcolname(colname)]]
 
     networks <- unlist(lapply(col, function (x) strsplit(as.character(x), ", ")))
 
@@ -78,16 +88,13 @@ funcOptions <- c("vůbec", "méně než jednou týdně", "alespoň jednou týdn�
 for (f in functionalities) {
     csvcolname <- paste("funkcionality", f, sep="")
 
-    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
-
-    write_answer_count(responses, colname, filename)
-    col <- responses[[colname]]
+    write_answer_count(responses, csvcolname)
+    col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
     frequency <- frequency[funcOptions] # seřadit podle daného pořadí
 
-    pdf(graph_path(filename))
+    pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,10,4,2)) # okraje
     barplot(frequency, horiz=TRUE)
@@ -101,16 +108,13 @@ netOptions = c("vůbec", "několikrát za měsíc nebo méně", "jednou nebo ně
 for (n in networks) {
     csvcolname <- paste("jine_site", n, sep="")
 
-    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
-
-    write_answer_count(responses, colname, filename)
-    col <- responses[[colname]]
+    write_answer_count(responses, csvcolname)
+    col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
     frequency <- frequency[netOptions] # seřadit podle daného pořadí
 
-    pdf(graph_path(filename))
+    pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,14,4,2)) # okraje
     barplot(frequency, horiz=TRUE)
@@ -124,16 +128,13 @@ reasOptions <- c("zcela souhlasím", "spíše souhlasím", "ani souhlas, ani nes
 for (r in reasons) {
     csvcolname = paste("proc_signaly", r, sep="")
 
-    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
-
-    write_answer_count(responses, colname, filename)
-    col <- responses[[colname]]
+    write_answer_count(responses, csvcolname)
+    col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
     frequency <- frequency[reasOptions] # seřadit podle daného pořadí
 
-    pdf(graph_path(filename))
+    pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,14,4,2)) # okraje
     barplot(frequency, horiz=TRUE)
@@ -149,18 +150,14 @@ intOptions <- c("zcela souhlasím", "spíše souhlasím", "je mi to jedno", "sp�
 
 for (i in interactions) {
     csvcolname <- paste("ostatni", i, sep="")
-    print(csvcolname)
 
-    colname <- gsub("[\\[\\]]", ".", csvcolname, perl=TRUE) # R hranaté závorky v názvech sloupců nemá rádo a načte je jako tečky
-    filename <- gsub("[\\[\\]]+", "_", gsub("]$", "", csvcolname, perl=TRUE), perl=TRUE) # odstranit hranate zavorky
-
-    write_answer_count(responses, colname, filename)
-    col <- responses[[colname]]
+    write_answer_count(responses, csvcolname)
+    col <- responses[[rcolname(csvcolname)]]
 
     frequency <- table(col)
     frequency <- frequency[intOptions] # seřadit podle daného pořadí
 
-    pdf(graph_path(filename))
+    pdf(graph_path(csvcolname))
     par(las=2) # popisky horizontálně
     par(mar=c(5,14,4,2)) # okraje
     barplot(frequency, horiz=TRUE)
