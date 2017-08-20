@@ -46,6 +46,20 @@ for (colname in columns) {
     dev.off()
 }
 
+## Jsem žák / student
+
+students <- responses[grep("ano", responses$studuji), ]
+
+colname <- "studuji_co"
+col <- students[[colname]]
+write_answer_count(students, colname)
+pdf(graph_path(colname))
+frequency = sort(table(col))
+print(frequency)
+pie(frequency, col=rainbow(length(frequency)))
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE)
+dev.off()
+
 ## sloupcový graf, každá odpověď může obsahovat víc položek
 columns <- list("pouzivas_dalsi_socialni_site", "neprijemne[co]")
 
