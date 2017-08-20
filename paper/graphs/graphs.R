@@ -172,6 +172,8 @@ up_cfgs = list(
     list(selector="Nepříjemné vzkazy", colnamepart="[vzkazy]")
 )
 
+up_reactions = list("[zvazoval_odchod]", "[zakazat]", "[pisatele_pryc]")
+
 for (cfg in up_cfgs) {
     # jen respondenti, kteří daný druh "nepříjemnosti" zažili
     relevant_responses <- responses[grep(cfg$selector, responses[[rcolname("neprijemne[co]")]]), ]
@@ -184,14 +186,30 @@ for (cfg in up_cfgs) {
 
     reasons <- unlist(lapply(col, function (x) strsplit(as.character(x), ",  "))) # čárka a dvě mezery, protože odpovědi často obsahují čárky
 
-    print(csvcolname)
-    print(graph_path(csvcolname))
     pdf(graph_path(csvcolname))
     frequency = sort(table(reasons))
     par(las=2) # popisky horizontálně
     par(mar=c(5,20,4,2)) # okraje
     barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
     dev.off()
+
+    ## ... uvažoval jsem, že kvůli nim odejdu, atd.
+
+    for (r in up_reactions) {
+        csvcolname <- paste("neprijemne", cfg$colnamepart, r, sep="")
+
+        write_answer_count(relevant_responses, csvcolname)
+        col <- relevant_responses[[rcolname(csvcolname)]]
+
+        frequency <- table(col)
+        frequency <- frequency[souhlas_jedno_nesouhlas] # seřadit podle daného pořadí
+
+        pdf(graph_path(csvcolname))
+        par(las=2) # popisky horizontálně
+        par(mar=c(5,14,4,2)) # okraje
+        barplot(frequency, horiz=TRUE)
+        dev.off()
+    }
 }
 
 ## vypsat varování
