@@ -37,6 +37,12 @@
   \end{figure}
 }
 
+\newcommand{\qtype}{\textbf{Typ otázky:}
+}
+\newcommand{\pickOne}{Výběr jedné možnosti z předdefinované sady}
+\newcommand{\pickMultiple}{Výběr více možností z předdefinované sady}
+\newcommand{\withOther}{s možností formulovat vlastní volnou odpověď (\uv{Jiné})}
+
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -128,13 +134,21 @@ podle vybraných antropologických proměnných.
 
 \subsubsection{Na Signálech mám profil}
 
+\qtype \pickOne.
+
 \includegraph{na_signalech_mam_profil}{}
 
 \subsubsection{O Signálech jsem se poprvé dozvěděl/a}
 
+\qtype \pickOne.
+Kromě možností zastoupených v grafu byla v nabídce ještě jedna,
+kterou nikdo nevyužil: \uv{na Facebooku}.
+
 \includegraph{o_signalech_jsem_se_poprve_dozvedel}{}
 
 \subsubsection{Na Signály chodím}
+
+\qtype \pickOne.
 
 \includegraph{na_signaly_chodim}{}
 
@@ -142,13 +156,71 @@ podle vybraných antropologických proměnných.
 
 \subsubsection{Na Signály chodím hlavně}
 
+\qtype \pickMultiple
+\withOther.
+
+Kromě předdefinovaných odpovědí (seznam níže)
+se z volných odpovědí vyprofilovaly tři drobné skupinky
+\uv{ŽMM}, \uv{Sleduji diskuse} a \uv{Slovo na den}.
+
+\begin{itemize}
+\item Kvůli kontaktu s kamarády z okolí (město, škola, farnost, …)
+\item Kvůli kontaktu s kamarády, které moc často nevídám
+\item Kvůli kontaktu s kamarády, které znám jenom ze Signálů
+\item Protože tu píšu blog
+\item Protože rád čtu blogy
+\item Protože rád čtu redakční obsah
+\item Kvůli přehledu křesťanských akcí
+\item Protože rád diskutuji
+\end{itemize}
+
 \includegraph{na_signaly_chodim_hlavne}{}
 
 \subsubsection{Signály jsem využil/a k}
 
+\qtype \pickMultiple
+\withOther.
+
+\begin{itemize}
+\item Psaní blogu
+\item Čtení blogů
+\item Čtení redakčního obsahu
+\item Nalezení akce, na kterou jsem pak jel/a
+\item Diskutování s ostatními uživateli
+\item Kontaktu s kamarády, které znám osobně (z místa bydliště, z DCM apod.)
+\item Hledání nových kamarádů
+\item Hledání partnera/partnerky
+\end{itemize}
+
 \includegraph{signaly_jsem_vyuzil_k}{}
 
 \subsubsection{Na Signálech \uv{se mi povedlo}}
+
+\qtype \pickMultiple
+\withOther.
+
+\begin{itemize}
+\item Přečíst si článek, který mě povzbudil
+\item Přečíst si článek, který se mi líbil
+\item Přečíst si článek, kde jsem se něco nového dozvěděl/a
+\item Najít bloggera, kterého od té doby rád/a čtu
+\item Napsat článek, který četlo hodně lidí
+\item Napsat článek, který se někomu líbil
+\item Napsat článek, pod kterým se rozhořela diskuse
+\item Obhájit v diskusi svůj názor
+\item Díky diskusi opravit svůj mylný názor
+\item Díky diskusi si rozšířit obzory
+\item Vyvést někoho z omylu
+\item Někoho "pořádně setřít"
+\item Lépe poznat nauku vlastní církve
+\item Lépe poznat nauku jiné církve
+\item Být znejistěn ohledně nauky vlastní církve
+\item Získat plnomocné odpustky
+\item Najít křesťanskou akci, na kterou jsem pak jel
+\item Psát si se svými kamarády
+\item Najít nové kamarády
+\item Najít partnera/partnerku
+\end{itemize}
 
 \includegraph{na_signalech_se_mi_povedlo}{}
 
