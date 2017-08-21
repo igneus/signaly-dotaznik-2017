@@ -28,6 +28,18 @@ basefilename <- function (csvcolname)
 # credits: https://stackoverflow.com/a/13353264/2034213
 red_to_green <- colorRampPalette(c("red", "yellow", "darkgreen"))
 
+# graf pro otázky s pevnou škálou od úplného souhlasu po nesouhlas
+agree_disagree_graph <- function (data, options, save_path) {
+    frequency <- table(data)
+    frequency <- frequency[options] # seřadit podle daného pořadí
+
+    pdf(save_path, height=3.5, width=6)
+    par(las=2) # popisky horizontálně
+    par(mar=c(5,14,4,2)) # okraje
+    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
+    dev.off()
+}
+
 ## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 
@@ -156,14 +168,7 @@ for (r in reasons) {
     write_answer_count(responses, csvcolname)
     col <- responses[[rcolname(csvcolname)]]
 
-    frequency <- table(col)
-    frequency <- frequency[rev(reasOptions)] # seřadit podle daného pořadí
-
-    pdf(graph_path(csvcolname))
-    par(las=2) # popisky horizontálně
-    par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
-    dev.off()
+    agree_disagree_graph(col, rev(reasOptions), graph_path(csvcolname))
 }
 
 ## volná otázka - necháme si uložit pouze počet odpovědí
@@ -180,14 +185,7 @@ for (i in interactions) {
     write_answer_count(responses, csvcolname)
     col <- responses[[rcolname(csvcolname)]]
 
-    frequency <- table(col)
-    frequency <- frequency[rev(souhlas_jedno_nesouhlas)] # seřadit podle daného pořadí
-
-    pdf(graph_path(csvcolname))
-    par(las=2) # popisky horizontálně
-    par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
-    dev.off()
+    agree_disagree_graph(col, rev(souhlas_jedno_nesouhlas), graph_path(csvcolname))
 }
 
 ## Nepříjemné ...
@@ -226,14 +224,7 @@ for (cfg in up_cfgs) {
         write_answer_count(relevant_responses, csvcolname)
         col <- relevant_responses[[rcolname(csvcolname)]]
 
-        frequency <- table(col)
-        frequency <- frequency[rev(souhlas_jedno_nesouhlas)] # seřadit podle daného pořadí
-
-        pdf(graph_path(csvcolname))
-        par(las=2) # popisky horizontálně
-        par(mar=c(5,14,4,2)) # okraje
-        barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
-        dev.off()
+        agree_disagree_graph(col, rev(souhlas_jedno_nesouhlas), graph_path(csvcolname))
     }
 }
 
