@@ -40,6 +40,23 @@ agree_disagree_graph <- function (data, options, save_path) {
     dev.off()
 }
 
+# graf pro otázky s pevnou škálou odpovědí na otázku "jak často"
+frequency_graph <- function (data, options, save_path, mar=c(5,10,4,2)) {
+    frequency <- table(data)
+    frequency <- frequency[options] # seřadit podle daného pořadí
+
+    pdf(save_path, height=3.5, width=6)
+    par(las=2) # popisky horizontálně
+    par(mar=mar) # okraje
+    colours <- rev(heat.colors(length(frequency)))
+    # parametr xlim nastavuje rozsah osy x.
+    # Použit je proto, aby všechny grafy v řadě měly osu stejně
+    # rozvrženou a daly se od oka srovnávat
+    barplot(frequency, horiz=TRUE, col=colours, xlim=c(0, 160))
+    dev.off()
+}
+
+# koláčový graf
 pie_graph <- function (data, save_path) {
     pdf(save_path, height=4, width=6)
     # the `as.character` is useful when working with subsets:
@@ -50,6 +67,8 @@ pie_graph <- function (data, save_path) {
     pie(frequency, col=rainbow(length(frequency)))
     dev.off()
 }
+
+
 
 ## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
@@ -128,15 +147,7 @@ for (f in functionalities) {
 
     write_answer_count(f_responses, csvcolname)
     col <- f_responses[[rcolname(csvcolname)]]
-
-    frequency <- table(col)
-    frequency <- frequency[funcOptions] # seřadit podle daného pořadí
-
-    pdf(graph_path(csvcolname))
-    par(las=2) # popisky horizontálně
-    par(mar=c(5,10,4,2)) # okraje
-    barplot(frequency, horiz=TRUE)
-    dev.off()
+    frequency_graph(col, funcOptions, graph_path(csvcolname))
 }
 
 ## frekvence využívání jiných sociálních sítí
@@ -148,15 +159,7 @@ for (n in networks) {
 
     write_answer_count(responses, csvcolname)
     col <- responses[[rcolname(csvcolname)]]
-
-    frequency <- table(col)
-    frequency <- frequency[netOptions] # seřadit podle daného pořadí
-
-    pdf(graph_path(csvcolname))
-    par(las=2) # popisky horizontálně
-    par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, horiz=TRUE)
-    dev.off()
+    frequency_graph(col, netOptions, graph_path(csvcolname), mar=c(5,14,4,2))
 }
 
 ## proč i v nynější konkurenci používám Signály
