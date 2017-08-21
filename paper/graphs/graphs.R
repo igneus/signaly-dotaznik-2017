@@ -40,6 +40,17 @@ agree_disagree_graph <- function (data, options, save_path) {
     dev.off()
 }
 
+pie_graph <- function (data, save_path) {
+    pdf(save_path, height=4, width=6)
+    # the `as.character` is useful when working with subsets:
+    # subsets inherit complete factors from the original data frame,
+    # but some of them may have no entry. We want to get rid of these.
+    frequency <- sort(table(as.character(data)))
+    par(mai=c(0.2, 0.1, 0.2, 0.1)) # okraje
+    pie(frequency, col=rainbow(length(frequency)))
+    dev.off()
+}
+
 ## načíst data
 responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 
@@ -53,14 +64,8 @@ columns = list(
 for (colname in columns) {
     col <- responses[[colname]]
 
-    # kolik uživatelů na otázku odpovědělo?
     write_answer_count(responses, colname)
-
-    # graf
-    pdf(graph_path(colname))
-    frequency = sort(table(col))
-    pie(frequency, col=rainbow(length(frequency)))
-    dev.off()
+    pie_graph(col, graph_path(colname))
 }
 
 ## Jsem žák / student
@@ -70,11 +75,7 @@ students <- responses[grep("ano", responses$studuji), ]
 colname <- "studuji_co"
 col <- students[[colname]]
 write_answer_count(students, colname)
-pdf(graph_path(colname))
-frequency = sort(table(as.character(col)))
-pie(frequency, col=rainbow(length(frequency)))
-barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE)
-dev.off()
+pie_graph(col, graph_path(colname))
 
 ## sloupcový graf, každá odpověď může obsahovat víc položek
 columns <- list("pouzivas_dalsi_socialni_site", "neprijemne[co]")
