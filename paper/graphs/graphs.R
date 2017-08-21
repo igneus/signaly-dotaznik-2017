@@ -28,6 +28,11 @@ basefilename <- function (csvcolname)
 # credits: https://stackoverflow.com/a/13353264/2034213
 red_to_green <- colorRampPalette(c("red", "yellow", "darkgreen"))
 
+# ze sloupce, kde každá buňka obsahuje jednu nebo víc odpovědí
+# oddělených čárkou, vrátí jeden plochý list se všemi odpověďmi
+comma_separated_answers <- function (data)
+    unlist(lapply(col, function (x) strsplit(as.character(x), ", ")))
+
 # graf pro otázky s pevnou škálou od úplného souhlasu po nesouhlas
 agree_disagree_graph <- function (data, options, save_path) {
     frequency <- table(data)
@@ -97,21 +102,29 @@ write_answer_count(students, colname)
 pie_graph(col, graph_path(colname))
 
 ## sloupcový graf, každá odpověď může obsahovat víc položek
-columns <- list("pouzivas_dalsi_socialni_site", "neprijemne[co]")
+# dalsi socialni site
+colname <- "pouzivas_dalsi_socialni_site"
+write_answer_count(responses, colname)
+col <- responses[[rcolname(colname)]]
+networks <- comma_separated_answers(col)
+pdf(graph_path(colname))
+frequency = sort(table(networks))
+par(las=2) # popisky horizontálně
+par(mar=c(5,8,4,2)) # okraje
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
 
-for (colname in columns) {
-    write_answer_count(responses, colname)
-    col <- responses[[rcolname(colname)]]
-
-    networks <- unlist(lapply(col, function (x) strsplit(as.character(x), ", ")))
-
-    pdf(graph_path(colname))
-    frequency = sort(table(networks))
-    par(las=2) # popisky horizontálně
-    par(mar=c(5,8,4,2)) # okraje
-    barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
-    dev.off()
-}
+# neprijemne zazitky
+colname <- "neprijemne[co]"
+write_answer_count(responses, colname)
+col <- responses[[rcolname(colname)]]
+networks <- comma_separated_answers(col)
+pdf(graph_path(colname), height=3.5, width=6) # velikost menších grafů
+frequency = sort(table(networks))
+par(las=2) # popisky horizontálně
+par(mar=c(5,12,4,2)) # větší levý okraj
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
 
 ## sloupcový graf, kažá odpověď může obsahovat víc položek,
 # některé položky obsahují čárky
