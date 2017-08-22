@@ -9,7 +9,7 @@ responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 columns = list(
 "na_signalech_mam_profil", "o_signalech_jsem_se_poprve_dozvedel", "na_signaly_chodim",
 "jsem_autorizovany",
-"jsem", "vek", "studuji", "moje_nejvyssi_dosazene_vzdelani"
+"jsem", "vek", "studuji"
 )
 
 for (colname in columns) {
@@ -50,6 +50,16 @@ pdf(graph_path(colname), height=3.5, width=6) # velikost menších grafů
 frequency = sort(table(networks))
 par(las=2) # popisky horizontálně
 par(mar=c(5,12,4,2)) # větší levý okraj
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
+
+colname <- "moje_nejvyssi_dosazene_vzdelani"
+write_answer_count(responses, colname)
+col <- responses[[rcolname(colname)]]
+pdf(graph_path(colname))
+frequency = sort(table(col))
+par(las=2) # popisky horizontálně
+par(mar=c(5,22,4,2)) # větší levý okraj
 barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
 dev.off()
 
