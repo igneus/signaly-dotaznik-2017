@@ -36,8 +36,8 @@ agree_disagree_graph <- function (data, options, save_path) {
 
     pdf(save_path, height=3.5, width=6)
     par(las=2) # popisky horizontálně
-    par(mar=c(5,14,4,2)) # okraje
-    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE)
+    par(mar=c(5,12,4,2)) # okraje
+    barplot(frequency, col=red_to_green(length(frequency)), horiz=TRUE, xlim=c(0, 140))
     dev.off()
 }
 
