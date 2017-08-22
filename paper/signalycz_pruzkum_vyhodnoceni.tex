@@ -43,6 +43,8 @@
 \newcommand{\pickOne}{Výběr jedné možnosti z předdefinované sady\xspace}
 \newcommand{\pickMultiple}{Výběr více možností z předdefinované sady\xspace}
 \newcommand{\withOther}{s možností formulovat vlastní volnou odpověď (\uv{Jiné})\xspace}
+\newcommand{\series}{(Řada otázek stejného typu se stejnými možnostmi odpovědi.)\xspace}
+\newcommand{\freeEntry}{Volná odpověď (textové pole)}
 
 
 \setcounter{secnumdepth}{3}
@@ -224,11 +226,15 @@ se z volných odpovědí vyprofilovaly tři drobné skupinky
 
 \subsection{Funkcionality, které využívám}\label{sec:funkcionality}
 
-\subsubsection{Jsem autorizovaný/á}
+\subsubsection{Jsem autorizovaný/á}\label{sec:autorizovany}
+
+\qtype \pickOne.
 
 \includegraph{jsem_autorizovany}{}
 
 \subsubsection{Jak často využívám jednotlivé funkcionality}
+
+\qtype \pickOne. \series
 
 \includegraph{funkcionality_status_pisu}{Na svou zeď píšu}
 
@@ -264,9 +270,15 @@ se z volných odpovědí vyprofilovaly tři drobné skupinky
 
 \includegraph{funkcionality_autorizovani_chat}{(Vyplňují jen autorizovaní uživatelé) Chat používám}
 
+Pokud na poslední otázku odpověděli i někteří uživatelé,
+kteří v \ref{sec:autorizovany} uvedli, že autorizovaní nejsou,
+jejich odpovědi nebyly do výsledků zahrnuty.
+
 \subsection{Signály a jiné sociální sítě}\label{sec:jinesite}
 
 \subsubsection{Používáš kromě Signálů i jiné sociální sítě? Jak často navštěvuješ}
+
+\qtype \pickOne. \series
 
 \includegraph{jine_site_Facebook}{Facebook}
 
@@ -280,11 +292,21 @@ se z volných odpovědí vyprofilovaly tři drobné skupinky
 
 \includegraph{jine_site_Lidecz}{Lidé.cz}
 
+\pagebreak
+
 \subsubsection{Používáš další sociální sítě?}
+
+\qtype \freeEntry.
+Všechny odpovědi měly charakter stručného seznamu jedné nebo více
+sociálních sítí (nebo jiných služeb, respondenty za sociální sítě
+považovaných). Pro účely sestavení grafu byly odpovědi normalizovány
+(sjednocení grafických variant, zestručnění formulací apod.).
 
 \includegraph{pouzivas_dalsi_socialni_site}{}
 
 \subsubsection{Proč používáš Signály, i když je dnes bohatá nabídka jiných sociálních sítí?}
+
+\qtype \pickOne. \series
 
 \includegraph{proc_signaly_jenom_signaly}{Používám jenom Signály, jiné sociální sítě nepotřebuji}
 
@@ -302,10 +324,11 @@ se z volných odpovědí vyprofilovaly tři drobné skupinky
 
 \includegraph{proc_signaly_krestanske_prostredi}{Na Signálech jsem proto, že mám rád křesťanské prostředí}
 
-\subsubsection{Pokud jseš na Signálech (ještě) kvůli něčemu jinému, můžeš nám to prozradit tady: (volná otázka)}
+\subsubsection{Pokud jseš na Signálech (ještě) kvůli něčemu jinému, můžeš nám to prozradit tady:}
 
-\answercount{proc_signaly_jine}.
+\qtype \freeEntry.
 Odpovědi byly částečně uspořádány podle témat.
+\answercount{proc_signaly_jine}.
 
 \begin{itemize}
 \item Hlavně jsem chtěl někde založit blog. Křesťanská sociální síť se zdála být vhodným prostředím :)
@@ -383,6 +406,8 @@ Odpovědi byly částečně uspořádány podle témat.
 
 \subsection{Já a ostatní uživatelé}\label{sec:ostatniuzivatele}
 
+\qtype \pickOne. \series
+
 \includegraph{ostatni_tesi_me_libi_se_kamaradi}{Těší mě, když se mým kamarádům líbí můj obsah (status, fotka, blog, video)}
 
 \includegraph{ostatni_tesi_me_libi_se_cizi}{Těší mě, když se cizím lidem líbí můj obsah}
@@ -403,15 +428,38 @@ Odpovědi byly částečně uspořádány podle témat.
 
 \includegraph{ostatni_neprijemne_zazivat_nechci}{Na Signálech jsem zažil/a situace, které zažívat nechci}
 
-\subsubsection{Na Signálech jsem zažil/a}
+\subsubsection{Na Signálech jsem zažil/a}\label{sec:neprijemneco}
+
+\qtype \pickMultiple.
 
 \includegraph{neprijemne_co}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné komentáře) Komentáře mi byly nepříjemné, protože}
 
+\qtype \pickMultiple \withOther.
+
+Do výsledků této a následující otázky byly zahrnuty
+jen odpovědi respondentů,
+kteří v \ref{sec:neprijemneco} uvedli, že zažili nepříjemné komentáře
+od kamarádů nebo od cizích lidí.
+
+\begin{itemize}
+\item Byly od kamaráda
+\item Byly od cizího člověka
+\item Byly od někoho, kdo je o hodně mladší
+\item Byly od někoho, kdo je o hodně starší
+\item Nevěděl/a jsem, od koho jsou
+\item Vyjadřovaly jiný názor, než mám já
+\item Pisatel psal, že nemám pravdu
+\item Dělaly si ze mě legraci
+\item Urážely mě
+\end{itemize}
+
 \includegraph{neprijemne_komentare_protoze}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné komentáře)}
+
+\qtype \pickOne. \series
 
 \includegraph{neprijemne_komentare_zvazoval_odchod}{Uvažoval/a jsem, že kvůli nepříjemným komentářům ze Signálů odejdu}
 
@@ -421,9 +469,30 @@ Odpovědi byly částečně uspořádány podle témat.
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné vzkazy) Vzkazy mi byly nepříjemné, protože}
 
+\qtype \pickMultiple \withOther.
+
+Do výsledků této a následující otázky byly zahrnuty
+jen odpovědi respondentů,
+kteří v \ref{sec:neprijemneco} uvedli, že zažili nepříjemné vzkazy
+od kamarádů nebo od cizích lidí.
+
+\begin{itemize}
+\item Byly od kamaráda
+\item Byly od cizího člověka
+\item Byly od někoho, kdo je o hodně mladší
+\item Byly od někoho, kdo je o hodně starší
+\item Nevěděl/a jsem, od koho jsou
+\item Vyjadřovaly jiný názor, než mám já
+\item Pisatel psal, že nemám pravdu
+\item Dělaly si ze mě legraci
+\item Urážely mě
+\end{itemize}
+
 \includegraph{neprijemne_vzkazy_protoze}{}
 
 \subsubsection{(Jen ti, kdo zažili nepříjemné vzkazy)}
+
+\qtype \pickOne. \series
 
 \includegraph{neprijemne_vzkazy_zvazoval_odchod}{Uvažoval/a jsem, že kvůli nepříjemným vzkazům ze Signálů odejdu}
 
@@ -435,23 +504,76 @@ Odpovědi byly částečně uspořádány podle témat.
 
 \subsubsection{Jsem}
 
+\qtype \pickOne.
+
 \includegraph{jsem}{}
 
 \subsubsection{Věk}
+
+\qtype \pickOne.
+Nad možnosti zachycené v grafu byly nabízeny také nikým nevyužité
+\uv{méně než 10 let} a \uv{11-12}.
 
 \includegraph{vek}{}
 
 \subsubsection{Studuji}
 
+\qtype \pickOne.
+
+\begin{itemize}
+\item ano (jsem žák ZŠ nebo student SŠ, VOŠ, VŠ)
+\item ne, vzdělání mám již ukončené
+\end{itemize}
+
 \includegraph{studuji}{}
 
 \subsubsection{(Jen žáci a studenti) Jsem žák / student}
+
+\qtype \pickOne \withOther.
+Volné odpovědi, které bezpečně zapadaly do jedné z předdefinovaných
+kategorií, byly normalizovány.
+
+\begin{itemize}
+\item ZŠ
+\item SŠ - učňovský obor
+\item SŠ - učňovský obor s maturitou
+\item SŠ - všeobecná (gymnázium nebo obdobný typ školy)
+\item SŠ - s odborným zaměřením (průmyslová, obchodní apod.)
+\item VOŠ
+\item VŠ - humanitní obor
+\item VŠ - přírodovědný obor
+\item VŠ - technický obor
+\end{itemize}
 
 \includegraph{studuji_co}{}
 
 \subsubsection{Moje nejvyšší dosažené vzdělání}
 
+\qtype \pickOne \withOther.
+Volné odpovědi, které bezpečně zapadaly do jedné z předdefinovaných
+kategorií, byly normalizovány.
+
+\begin{itemize}
+\item ZŠ
+\item SŠ - učňovský obor
+\item SŠ - učňovský obor s maturitou
+\item SŠ - všeobecná (gymnázium nebo obdobný typ školy)
+\item SŠ - s odborným zaměřením (průmyslová, obchodní apod.)
+\item VOŠ
+\item VŠ - humanitní obor
+\item VŠ - přírodovědný obor
+\item VŠ - technický obor
+\end{itemize}
+
 \includegraph{moje_nejvyssi_dosazene_vzdelani}{}
+
+{\footnotesize
+Ješitnost autorovi dotazníku velí zdůraznit, že volná
+odpověď \uv{věčného studenta} \emph{nepochází} od něj.
+Ač také věčný student, nemá potřebu schovávat se před
+trapnou skutečností, že jeho nejvyšší \emph{dosažené} vzdělání
+je jen středoškolské.
+}
 
 \subsection{Volná otázka \uv{Chci dodat}}
 
