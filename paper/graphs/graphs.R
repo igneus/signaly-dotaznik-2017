@@ -8,8 +8,7 @@ responses <- read.csv("../data/normalised.csv", na.strings=c(""))
 ## koláčový graf rozložení odpovědí
 columns = list(
 "na_signalech_mam_profil", "o_signalech_jsem_se_poprve_dozvedel", "na_signaly_chodim",
-"jsem_autorizovany",
-"jsem", "vek", "studuji"
+"jsem_autorizovany", "jsem", "studuji"
 )
 
 for (colname in columns) {
@@ -18,6 +17,18 @@ for (colname in columns) {
     write_answer_count(responses, colname)
     pie_graph(col, graph_path(colname))
 }
+
+## věk
+# je zvlášť proto, že tu výjimečně nechceme řadit podle množství
+# odpovědí v sektoru, ale nechat pořadí podle věku
+colname <- "vek"
+col <- responses[[colname]]
+write_answer_count(responses, colname)
+pdf(graph_path(colname), height=4, width=6)
+frequency <- table(as.character(col))
+par(mai=c(0.2, 0.1, 0.2, 0.1)) # okraje
+pie(frequency, col=rainbow(length(frequency)))
+dev.off()
 
 ## Jsem žák / student
 
