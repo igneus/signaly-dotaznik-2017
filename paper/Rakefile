@@ -1,6 +1,6 @@
 deps = Dir["*.tex"] + Dir["*.*bx"] + Dir['*.bib'] + [:graphs]
 
-main = Dir['*.tex'].first # only one expected
+main = Dir['sig*.tex'].first
 main_noext = main.sub '.tex', ''
 main_pdf = main.sub '.tex', '.pdf'
 
