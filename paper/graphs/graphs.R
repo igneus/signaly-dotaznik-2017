@@ -1,4 +1,4 @@
-# generuje grafy
+# grafy prostého rozložení odpovědí do přehledu otázek
 
 source("graphs/functions.R") # relative to the 'paper' directory
 

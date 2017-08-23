@@ -25,4 +25,5 @@ end
 desc "vygenerovat grafy"
 task :graphs do
   sh 'Rscript graphs/graphs.R'
+  sh 'Rscript graphs/analysis.R'
 end
