@@ -39,6 +39,14 @@
   \end{figure}
 }
 
+\newcommand{\includegraphonly}[2]{
+  \begin{figure}[H]
+    \centering
+    \textbf{#2}
+    \includegraphics{graphs/img/#1.pdf}
+  \end{figure}
+}
+
 \newcommand{\qtype}{\textbf{Typ otázky:}
 }
 \newcommand{\pickOne}{Výběr jedné možnosti z předdefinované sady\xspace}
@@ -147,7 +155,7 @@ podle vybraných antropologických proměnných.
 
 \subsection{Moje aktivita na Signálech}\label{sec:mojeaktivita}
 
-\subsubsection{Na Signálech mám profil}
+\subsubsection{Na Signálech mám profil}\label{sec:mamprofil}
 
 \qtype \pickOne.
 
@@ -514,13 +522,13 @@ od kamarádů nebo od cizích lidí.
 
 \subsection{Osobní údaje}\label{sec:osobni}
 
-\subsubsection{Jsem}
+\subsubsection{Jsem}\label{sec:pohlavi}
 
 \qtype \pickOne.
 
 \includegraph{jsem}{}
 
-\subsubsection{Věk}
+\subsubsection{Věk}\label{sec:vek}
 
 \qtype \pickOne.
 Nad možnosti zachycené v grafu byly nabízeny také nikým nevyužité
@@ -600,11 +608,11 @@ omylem, ne záměrně.)
 
 \section{Vypovídací hodnota sebraných dat}
 
-\subsection{Pravdivost údajů}
-
 Než přikročíme k interpretaci sebraných dat, je třeba věnovat
 pozornost skutečnostem, které mají vliv na jejich vypovídací
 hodnotu.
+
+\subsection{Pravdivost údajů}
 
 Jako u většiny anonymních internetových dotazníků,
 nemáme žádnou jistotu, že respondenti skutečně patří do cílové
@@ -653,7 +661,11 @@ Dalším možným faktorem selekce je osoba průzkum provádějící:
 od začátku totiž šlo o soukromý osobní počin. Autor se pak stěží
 může považovat za osobu známou a všeobecně oblíbenou.
 Je tudíž možné, že jsou ve vzorku nedostatečně zastoupeni
-\uv{ti, kdo nemají rádi \suser{dromedar}a}.
+\uv{ti, kdo nemají rádi \suser{dromedar}a} (a tudíž nemají chuť
+zapojovat se do jeho podniků).
+Není ale důvod myslet si, že by tato skupina, pokud vůbec existuje,
+byla nějak velká nebo charakteristicky profilovaná a její případné
+nezapojení se mělo zásadnější vliv na celkový obraz.
 
 \subsection{Předpoklad spolehlivosti}
 
@@ -669,14 +681,18 @@ principielní nepravdivost sebraných dat.
 Pokud jde o reprezentativnost vzorku, je namístě větší opatrnost.
 Pro zpřesnění pohledu by bylo užitečné mít informace
 o návštěvnosti webu ve sledovaném období a o skladbě (např. věkové)
-aktivních uživatelů, jak je mají k dispozici správci webu.
+aktivních uživatelů, jak je mají k dispozici
+správci webu.\footnote{
+  Nepamatuji si ovšem, že by data tohoto druhu za celou historii
+  Signálů kdy byla zveřejněna, a předpokládám, že se z toho
+  spíš nebude dělat výjimka.
+}
 I zde však snad můžeme předpokládat, že vzorek víceméně
 reprezentativní je.
 
-Dále tedy budeme předpokládat, že sebraná data jsou v zásadě
+\textbf{Dále tedy budeme předpokládat, že sebraná data jsou v zásadě
 pravdivá a představují reprezentativní vzorek uživatelské základny
-Signálů. Kde by se v dílčích otázkách zdála platnost některého
-z těchto předpokladů pochybná, bude na to zvlášť upozorněno.
+Signálů.}
 
 \section{Celkový pohled}
 
@@ -694,6 +710,39 @@ Na tyto dvě otázky tedy budeme hledat odpověď (nebo odpovědi).
 \subsection{Signály jako produkt}
 
 \subsubsection{Kdo Signály používá}
+
+Z grafů odpovědí na jednotlivé otázky je zřejmé,
+že na Signálech výrazně převažují ženy nad muži (\ref{sec:pohlavi})
+a nejsilnější věkovou skupinou (\ref{sec:vek}) je skupina
+21-40 let. Typickým uživatelem je žena v produktivním věku.
+To lze ilustrovat grafem zastoupení pohlaví v jednotlivých
+věkových skupinách:
+
+\includegraphonly{vek_x_pohlavi}{Věkové skupiny podle pohlaví}
+
+Většina aktivních uživatelů Signály používá
+(nebo tu přinejmenším má profil) opravdu dlouho (\ref{sec:mamprofil}).
+Šest nebo více let jsou registrovány více než tři čtvrtiny uživatelů,
+více než jedna třetina pak je registrována po celých deset let,
+kdy Signály jako sociální síť fungují. Nebude tedy velkým
+přeháněním, když řekneme, že Signály -- přinejmenším pokud
+jde o uživatelskou základnu -- dodnes žijí ze vkladu prvních let
+provozu.
+
+Při pohledu zvenku se zdá, že aktivní společenství
+\uv{Ženy, matky, manželky}\footnote{
+  \url{https://www.signaly.cz/zeny-matky-manzelky}},
+cílící právě na ženy v produktivním věku, na Signály přitáhlo
+velké množství nových uživatelek a početní převahu této skupiny
+dále posílilo. Sebraná data ale tuto domněnku nepotvrzují.
+Naopak se zdá, že v poslední době na Signálech žen nijak
+dramaticky nepřibývá a ŽMM tedy zřejmě bere členky především
+z řad stávajících uživatelek.
+(Popř. se zástupy čerstvých \uv{uživatelek-matek-manželek} do výsledků
+průzkumu z nějakého důvodu nepromítly, což by ovšem kladlo
+velký otazník před náš předpoklad reprezentativnosti sebraných dat.)
+
+\includegraphonly{profil_x_pohlavi}{Stáří uživatelského profilu a pohlaví}
 
 \subsubsection{Co mu Signály přinášejí}
 

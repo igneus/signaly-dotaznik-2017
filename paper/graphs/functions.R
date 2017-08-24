@@ -24,6 +24,8 @@ basefilename <- function (csvcolname)
 # credits: https://stackoverflow.com/a/13353264/2034213
 red_to_green <- colorRampPalette(c("red", "yellow", "darkgreen"))
 
+red_to_blue <- colorRampPalette(c("red", "blue"))
+
 # ze sloupce, kde každá buňka obsahuje jednu nebo víc odpovědí
 # oddělených čárkou, vrátí jeden plochý list se všemi odpověďmi
 comma_separated_answers <- function (data)
