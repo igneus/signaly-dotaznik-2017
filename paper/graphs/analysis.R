@@ -24,7 +24,7 @@ subgroup_colnames <- c(
 "ženy",
 "absolventky VŠ"
 )
-subgroups = matrix(subgroup_values, ncol=length(subgroup_values), byrow=TRUE)
+subgroups <- matrix(subgroup_values, ncol=length(subgroup_values), byrow=TRUE)
 colnames(subgroups) <- subgroup_colnames
 subgroup_table <- as.table(subgroups)
 
@@ -36,14 +36,31 @@ dev.off()
 
 ## Věk x pohlaví
 pdf(graph_path("vek_x_pohlavi"), height=3.5, width=6)
-tbl = table(responses$jsem, responses$vek)
+tbl <- table(responses$jsem, responses$vek)
 barplot(tbl, col=rev(red_to_blue(2)), cex.names=0.8)
 dev.off()
 
 ## Stáří profilu x pohlaví
 pdf(graph_path("profil_x_pohlavi"), height=3.5, width=6)
-tbl = table(responses$jsem, responses$na_signalech_mam_profil)
+tbl <- table(responses$jsem, responses$na_signalech_mam_profil)
 par(las=2) # orientace popisků
 par(mar=c(8,3,4,2)) # okraje
 barplot(tbl, col=rev(red_to_blue(2)), cex.names=0.8)
+dev.off()
+
+## Absolventi: typy škol
+absolvents <- responses[grep("ne", responses$studuji), ]
+school_types <-
+    as.character(lapply(na.omit(absolvents$moje_nejvyssi_dosazene_vzdelani), function (x) {
+        if (grepl("VŠ", x))
+           "VŠ"
+        else if (grepl("SŠ", x))
+           "SŠ"
+        else
+           "jiná"
+    }))
+tbl <- table(school_types)
+pdf(graph_path("vzdelani_sloucene"), height=4, width=6)
+par(mai=c(0.2, 0.1, 0.2, 0.1)) # okraje
+pie(tbl, col=rainbow(length(tbl)))
 dev.off()
