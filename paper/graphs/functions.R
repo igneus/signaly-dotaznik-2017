@@ -31,6 +31,10 @@ red_to_blue <- colorRampPalette(c("red", "blue"))
 comma_separated_answers <- function (data)
     unlist(lapply(col, function (x) strsplit(as.character(x), ", ")))
 
+# obdobné jako výše, pro sloupce, kde odpovědi mohou obsahovat čárku
+comma_doublespace_separated_answers <- function (data)
+    unlist(lapply(data, function (x) strsplit(as.character(x), ",  ")))
+
 # graf pro otázky s pevnou škálou od úplného souhlasu po nesouhlas
 agree_disagree_graph <- function (data, options, save_path) {
     frequency <- table(data)

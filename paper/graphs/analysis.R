@@ -77,3 +77,31 @@ frequency_graph(active_signaly_users[[rcolname("jine_site[Facebook]")]], netOpti
 
 lessactive_signaly_users <- responses[!grepl("denně", responses$na_signaly_chodim), ]
 frequency_graph(lessactive_signaly_users[[rcolname("jine_site[Facebook]")]], netOptions, graph_path("mene_aktivni_signalnici_a_fb"), mar=c(5,14,4,2))
+
+# Noví uživatelé
+new_users <- responses[grep("(rok nebo|2 roky)", responses$na_signalech_mam_profil, perl=TRUE), ]
+print(nrow(new_users))
+
+pie_graph(new_users$vek, graph_path("novi_vek"))
+pie_graph(new_users$jsem, graph_path("novi_pohlavi"))
+pie_graph(new_users$moje_nejvyssi_dosazene_vzdelani, graph_path("novi_vzdelani"))
+pie_graph(new_users$na_signaly_chodim, graph_path("novi_jakcasto"))
+pie_graph(new_users$o_signalech_jsem_se_poprve_dozvedel, graph_path("novi_dozvedelise"))
+
+col <- new_users[[rcolname("neprijemne[co]")]]
+up_what <- comma_separated_answers(col)
+pdf(graph_path("novi_neprijemne"), height=3.5, width=6)
+frequency <- sort(table(up_what))
+par(las=2) # popisky horizontálně
+par(mar=c(5,13,4,2)) # větší levý okraj
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
+
+reasons <- comma_doublespace_separated_answers(new_users$na_signaly_chodim_hlavne)
+print(reasons)
+pdf(graph_path("novi_chodimhlavne"), height=5, width=6)
+frequency = sort(table(reasons))
+par(las=2) # popisky horizontálně
+par(mar=c(4,20,2,2)) # okraje
+barplot(frequency, col=rainbow(length(frequency)), horiz=TRUE, cex.names=0.8)
+dev.off()
