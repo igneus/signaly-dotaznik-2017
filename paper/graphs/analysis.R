@@ -64,3 +64,16 @@ pdf(graph_path("vzdelani_sloucene"), height=4, width=6)
 par(mai=c(0.2, 0.1, 0.2, 0.1)) # okraje
 pie(tbl, col=rainbow(length(tbl)))
 dev.off()
+
+# Jak staré jsou autorizované profily?
+authorized_users <- responses[responses$jsem_autorizovany == "ano", ]
+pie_graph(authorized_users$na_signalech_mam_profil, graph_path("stari_autorizovanych_profilu"))
+
+# Signály vs. Facebook
+netOptions <- c("vůbec", "několikrát za měsíc nebo méně", "jednou nebo několikrát týdně", "každý den", "vícekrát za den")
+
+active_signaly_users <- responses[grep("denně", responses$na_signaly_chodim), ]
+frequency_graph(active_signaly_users[[rcolname("jine_site[Facebook]")]], netOptions, graph_path("nejaktivnejsi_signalnici_a_fb"), mar=c(5,14,4,2))
+
+lessactive_signaly_users <- responses[!grepl("denně", responses$na_signaly_chodim), ]
+frequency_graph(lessactive_signaly_users[[rcolname("jine_site[Facebook]")]], netOptions, graph_path("mene_aktivni_signalnici_a_fb"), mar=c(5,14,4,2))
